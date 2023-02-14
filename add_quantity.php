@@ -35,6 +35,24 @@ $result2 = mysqli_query($link, $res2) or die(mysql_error());
         header('location: pos.php');
 
 
+    }else if($remaining_stock == '4'){
+        $zero_stock = $remaining_stock - '1';
+        $zero_quantity = $quantity + '1';
+        $total_price = $price + $total;
+
+        $addstock = "UPDATE product SET `remaining_stock` = '$zero_stock', `notif_status` = '0' WHERE `product_id` = '$addID' ";
+        mysqli_query($link, $addstock) or die(mysqli_error());
+            
+        $sql = "UPDATE cart SET `quantity` = '$zero_quantity', `total_amount` = '$total_price' WHERE `cart_id`  = '$productid' ";
+        mysqli_query($link, $sql) or die(mysqli_error());
+
+
+        $sql1 = "UPDATE sales SET `quantity` = '$zero_quantity', `total_amount` = '$total_price' WHERE `transaction_time`  = '$time' ";
+        mysqli_query($link, $sql1) or die(mysqli_error());
+
+        header('location: pos.php');
+
+
     }else{
         $minus_stock = $remaining_stock - '1';
         $add_quantity = $quantity + '1';

@@ -1,6 +1,6 @@
 <?php
 //fetch.php;
-include 'config.php';
+include("config.php");
 if(isset($_POST["view"]))
 {
   if($_POST["view"] != '')
@@ -8,7 +8,7 @@ if(isset($_POST["view"]))
   $update_query = "UPDATE product SET notif_status=1 WHERE notif_status=0";
   mysqli_query($link, $update_query);
  }
- $query = "SELECT * FROM product where remaining_stock = 0 ORDER BY product_id Limit 8";
+ $query = "SELECT * FROM product where remaining_stock <= 3 ORDER BY product_id Limit 8";
  $result = mysqli_query($link, $query);
  $output = '';
  
@@ -18,9 +18,9 @@ if(isset($_POST["view"]))
   {
    $output .= '
    <li>
-    <a href="product.php">
+    <a href="edit_product.php?id='.$row["product_id"].'">
      <strong>'.$row["product_name"].'</strong><br />
-     <small><em>Out of stock</em></small>
+     <small><em>Remaining stock '.$row["remaining_stock"].'</em></small>
     </a>
    </li>
    <li class="divider"></li>
@@ -32,7 +32,7 @@ if(isset($_POST["view"]))
   $output .= '<li><a href="#" class="text-bold text-italic">No Notification Found</a></li>';
  }
  
- $query_1 = "SELECT * FROM product WHERE notif_status = 0";
+ $query_1 = "SELECT * FROM product WHERE notif_status = 1";
  $result_1 = mysqli_query($link, $query_1);
  $count = mysqli_num_rows($result_1);
  $data = array(

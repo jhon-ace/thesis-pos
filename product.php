@@ -119,7 +119,7 @@
                 </tr>  
             </thead>
                 <?php
-                $res = "SELECT * FROM product";
+                $res = "SELECT * FROM product order by remaining_stock > 0";
                 $result = mysqli_query($link, $res) or die(mysql_error());
 
                     for($i=0; $i<$num_rows=mysqli_fetch_array($result);$i++) {

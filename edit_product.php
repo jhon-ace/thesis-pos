@@ -208,11 +208,14 @@ else if(isset($_POST['submit-media'])){
     <?php } ?>
 
     <?php include 'header.php' ?>
+    <?php
+        if($access=='admin'){
+    ?> 
 
         <div class="scroll-content">
 
             <span style="font-size: 22px;"><i class='fas fa-cog'></i> Manage Product Inforamtion</span>
-            <a href="product.php"><button class="btn btn-primary" style="float: right;"><i class="fas fa-arrow-left"></i> Return to table</button></a>
+            <a href="product.php"><button class="btn btn-primary" style="float: right;"><i class="fas fa-arrow-left"></i> View product table</button></a>
             <hr>
 
             <div class="sign-up-content-media">
@@ -389,6 +392,66 @@ else if(isset($_POST['submit-media'])){
                     </div>
                     
         </div>
+    <?php
+        }else if($access=='employee'){
+    ?>
+        <div class="scroll-content">
+
+            <span style="font-size: 22px;"><i class='fas fa-cog'></i> Manage Product Inforamtion</span>
+            <hr>
+
+            <div class="sign-up-content-media">
+                <span style="font-size: 18px;"><i class="fas fa-image"></i> Product Picture:</span>
+                <center>
+                <hr>
+                
+                    <input type="hidden" name="media" value="<?php echo $productmediaupdate; ?>" id="media">
+                    <img class="img-responsive" id="imageSamp" style="height:225px; width:225px;" src="img/upload.png">
+                    <img class="img-responsive" id="image" style="height:225px; width:225px;; display: none;">
+                    
+                <hr>
+                <span>Only admin can update photo</span>
+                </center>
+            </div>
+
+            <div class="sign-up-content"> 
+                <span style="font-size: 18px;"><i class="fas fa-info-circle"></i> Product Information:</span>
+                <hr>
+                    <strong>Product Name:</strong> <br/><br/>
+                    <?= $nameupdate; ?>
+                    <button class="btn btn-danger" style="float: right;" type="button"><i class="fas fa-pen-square"></i> Edit
+                    </button>
+                    <br/><br/>
+                    <hr>
+                    <strong>Price:</strong> <br/><br/>
+                    ₱ <?= $priceupdate; ?>
+                    <button class="btn btn-danger" style="float: right;" type="button"><i class="fas fa-pen-square"></i> Edit
+                    </button>
+                    <br/><br/>
+                    <hr>
+                    <strong>Stock:</strong> <br/><br/>
+                    <?php
+                        if($stockupdate=="0"){
+                            echo"<span style='color: #d9534f;'><strong>Out of Stock</strong></span>";
+                        }else{
+                             echo"".$stockupdate."";     
+                        }
+                    ?>
+                    <button class="btn btn-danger" style="float: right;" type="button"><i class="fas fa-pen-square"></i> Edit
+                    </button>
+
+
+                    
+               
+                    <br/><br/>
+                    <hr>
+                    <strong>Description:</strong> <br/><br/>
+                    <?php echo $descriptionupdate; ?>
+                    <button class="btn btn-danger" style="float: right;" type="button"><i class="fas fa-pen-square"></i> Edit
+                    </button>
+                    
+        </div>
+    <?php } ?>
         <?php include 'footer_links.php' ?>
     </body>
 </html>

@@ -37,7 +37,7 @@ class myPDF extends FPDF{
 		$this->SetFont('Arial','B',10);
 		$stmt = $db->query('SELECT SUM(total_amount) as result FROM transactions WHERE DATE(transaction_date) > CURDATE() - INTERVAL 7 DAY');
 		while($data = $stmt->fetch(PDO::FETCH_OBJ)){
-			$this->Cell(58,5,'Total :',0,0,'R');
+			$this->Cell(57,5,'Total :',0,0,'R');
 			$this->Cell(30,5,$data->result,0,0,'L');
 			$this->Ln(10);
 
@@ -47,12 +47,7 @@ class myPDF extends FPDF{
 		$this->SetFont('Arial','B',10);
 		
 		date_default_timezone_set('Asia/Manila');
-		$date = date('N');		
-		$daysToSunday = 7 - $date;
-		$sunday = date('l,F j,Y',strtotime("+ {$daysToSunday} Days"));
-		$daysFromMonday = $date - 1;
-		$Monday = date('l,F j,Y',strtotime("- {$daysFromMonday} Days"));
-		$stmt = $db->query('SELECT * FROM sales WHERE DATE(transaction_time) > CURDATE() - INTERVAL 7 DAY limit 1 ');
+
 		
 		$link = mysqli_connect('localhost','root','','pos');
 	
@@ -60,8 +55,9 @@ class myPDF extends FPDF{
 		for($a = 0 ; $a < $num_rows = mysqli_fetch_array($sql) ; $a++ )
 			{
 				$transaction_time = $num_rows['transaction_time'];;
+				$ydate = date_create($transaction_time);
 				$this->Cell(36,5,'Beginning date:',0,0,'R');
-				$this->Cell(30,5,$transaction_time,0,0,'L');
+				$this->Cell(30,5,date_format($ydate, 'l, F j, Y'),0,0,'L');
 			break;
 			
 				
@@ -89,7 +85,7 @@ class myPDF extends FPDF{
 				date_add($fdate, date_interval_create_from_date_string('6 days'));
 			
 				$this->Cell(163,5,'End date:',0,0,'R');
-				$this->Cell(30,5,date_format($fdate, 'Y-m-d'),0,0,'L');
+				$this->Cell(30,5,date_format($fdate, 'l, F j, Y'),0,0,'L');
 					
 			break;
 			
@@ -97,7 +93,7 @@ class myPDF extends FPDF{
 			}
 		///////////	
 		
-	
+	$this->Ln(10);
 	}
 
 

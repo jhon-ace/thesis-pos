@@ -11,7 +11,7 @@ class myPDF extends FPDF{
 		date_default_timezone_set('Asia/Manila');
 		$month= date('F Y');
 		$this->SetFont('Arial','B',10);
-		$this->Cell(145,5,"THE MONTH OF: $month",0,0,'C');
+		$this->Cell(132,5,"SALES OF: $month",0,0,'C');
 		$this->Ln(5);
 	
 	}

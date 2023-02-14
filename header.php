@@ -14,15 +14,17 @@ $result1 = mysqli_query($link, $res1) or die(mysql_error());
 ?>
         <nav class="navbar navbar-inverse">
         <div class="container-fluid">
-         <ul class="nav navbar-nav navbar-right">
-          <li><img src="<?php echo $media; ?>"></li>
-          <li><a href='manage_profile.php?id=<?php echo $_SESSION['id'];?>'><strong><?php echo $username; ?></strong></a></li>
-          <li class="dropdown">
-           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="label label-pill label-danger count" style="border-radius:10px;"></span> <span class="glyphicon glyphicon-bell" style="font-size:18px;"></span></a>
-           <ul class="dropdown-menu"></ul>
-          </li>
-          <li><a href='#' data-modal-id='modal-logout' class='launch-modal'><i class="fas fa-power-off"></i></a></li>
-         </ul>
+            <ul class="nav navbar-nav navbar-right">
+            <li><img src="<?php echo $media; ?>"></li>
+            <li><a href='manage_profile.php?id=<?php echo $_SESSION['id'];?>'><strong><?php echo $username; ?></strong></a></li>
+            <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <span class="label label-default label-danger count" style="border-radius:10px;"></span> 
+                <span class="glyphicon glyphicon-bell" style="font-size:18px;"></span></a>
+            <ul class="dropdown-menu"></ul>
+            </li>
+            <li><a href='#' data-modal-id='modal-logout' class='launch-modal'><i class="fas fa-power-off"></i></a></li>
+            </ul>
         </div>
        </nav>
 		<div class="modal fade" id="modal-logout" tabindex="-1" role="dialog" aria-labelledby="modal-login-label" aria-hidden="true">

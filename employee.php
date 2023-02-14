@@ -315,7 +315,7 @@ if(isset($_POST['submit-employee'])){
     }
     if($saveData == 'true'){
     $hash = password_hash($password, PASSWORD_BCRYPT);
-    $sql = "INSERT INTO `pos`.`employee`(`employee_id`,`employee_name`,`employee_username`,`employee_password`,`employee_access`,`employee_media`,`status`,`logs`) VALUES('','$name','$username','$hash','employee','$target_file','active',`logout`)";
+    $sql = "INSERT INTO `pos`.`employee`(`employee_id`,`employee_name`,`employee_username`,`employee_password`,`employee_access`,`employee_media`,`status`,`logs`) VALUES('','$name','$username','$hash','employee','$target_file','active','logout')";
         mysqli_query($link, $sql) or die(mysqli_error());
         $message = "Employee succesfully added!";
         echo "<script type='text/javascript'>alert('$message'); window.location.assign('employee.php')</script>";

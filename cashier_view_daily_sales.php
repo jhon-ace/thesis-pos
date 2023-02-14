@@ -80,7 +80,7 @@
 	<?php include 'header.php' ?>
 
     <div class="scroll-content">
-        <span style="font-size: 22px;"><i class="fa fa-chart-bar"></i> Cashier Daily Sales Report</span>
+        <span style="font-size: 22px;"><i class="fa fa-chart-bar"></i> My Sales Report</span>
         <?php
             $query = "SELECT SUM(total_amount) as result FROM sales where DATE(transaction_time) = CURDATE() and cashier = '$cashier'";
             $result = mysqli_query($link, $query) or die(mysql_error());
@@ -90,8 +90,16 @@
             <label style='float: right;'>Total Sales: <span style='color: #5cb85c;'>₱ 0.00</span></label>
         <?php }else{ ?>
             <label style='float: right;'>Total Sales: <span style='color: #5cb85c;'>₱ <?php echo $row['result'];?></span></label>
+            <!--<br>
+            <br>
+                             <a href="fpdf/daily_sales.php" target="_blank"><button style="float: right;background-color: #337AB7;border:1;color:white">&nbsp;<i class="fa fa-shopping-bag"></i> Print
+         </button></a>-->
          <?php } ?>
+<br>             
+
+         <br>
         <hr>
+
         <div id="employee_sales_table">   
             <table id="dtTable" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">   
                         <thead>  

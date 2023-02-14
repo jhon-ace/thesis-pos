@@ -24,7 +24,7 @@ class myPDF extends FPDF{
 		$this->SetFont('Arial','B',10);
 		date_default_timezone_set('Asia/Manila');
 		$datekaron = date('l, F j, Y');
-		$this->Cell(150,5,"Date: $datekaron\n",0,0,'C');
+		$this->Cell(145,5,"Date: $datekaron\n",0,0,'C');
 		$this->Ln(5);
 
 	
@@ -33,8 +33,9 @@ class myPDF extends FPDF{
 
 	function displayTotal($db){
 		$this->SetFont('Arial','B',10);
-		$stmt = $db->query('SELECT SUM(total_amount) as result FROM transactions where DATE(transaction_date) = CURDATE() ');
-		while($data = $stmt->fetch(PDO::FETCH_OBJ)){
+		$stmt = $db->query('SELECT SUM(total_amount) as result FROM transactions where DATE(transaction_date) = CURDATE() '); 
+		while($data = $stmt->fetch(PDO::FETCH_OBJ))
+		{
 			$this->Cell(57,5,'Total :',0,0,'R');
 			$this->Cell(30,5,$data->result,0,0,'L');
 			$this->Ln(10);
@@ -79,7 +80,7 @@ class myPDF extends FPDF{
 
 $pdf = new myPDF();
 $pdf->AliasNbPages();
-$pdf->AddPage('L','A4',0);
+$pdf->AddPage('L','a4',0);
 $pdf->Image('logo.png',10,10,-220);
 $pdf->todaydate($db);
 $pdf->displayTotal($db);

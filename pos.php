@@ -13,7 +13,7 @@
                 <img src="img/logo.png">
              </center>
             <ul>
-                <li>
+                <li> 
                     <a href="dashboard.php">
                         <i class="fa fa-tachometer-alt"></i>
                         <span>Dashboard</span>
@@ -107,7 +107,7 @@
             </div>
             <div class="container" style="padding: 5px 0; float: left; width: 100%;">
             <table id="tableCart" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%" style="background-color: white;">  
-                <thead>  
+                <thead>   
                     <tr> 
                         <th style="text-align: center;">Photo</th>
                         <th>Product Name</th>

@@ -62,7 +62,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="pos.php">
+                    <a href="POS.php">
                         <i class="fa fa-th"></i>
                         <span>POS</span>
                     </a>
@@ -77,7 +77,7 @@
         </div>
     <?php } ?>
     <?php include 'header.php' ?>
-    <div class="main-content">
+    <div class="scroll-content">
         <span style="font-size: 22px;"><i class="fas fa-tachometer-alt"></i> Dashboard</span>
         <hr>
         <?php if($access=='admin'){ ?>
@@ -168,6 +168,69 @@
             </div>
         </div></a>
         <?php } ?>
+        <div class="low-product-content">
+            <span style="font-size: 22px;"><i class="fa fa-shopping-bag"></i> Low in Stock</span>
+            <hr>
+
+            <table class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">  
+                <thead>  
+                    <tr> 
+                        <th style="text-align: center;">Photo</th>
+                        <th>Product Name</th>    
+                        <th>Price</th>
+                        <th>Stock</th>
+                        <th>Barcode #</th>
+                        <th>Description</th> 
+                        <th style="text-align: center;">Action</th>  
+                    </tr>  
+                </thead>
+                    <?php
+                    $res = "SELECT * FROM product WHERE remaining_stock <= 3 ORDER BY product_name ASC";
+                    $result = mysqli_query($link, $res) or die(mysql_error());
+
+                        for($i=0; $i<$num_rows=mysqli_fetch_array($result);$i++) {
+                            $productid=$num_rows["product_id"];
+                            $name=$num_rows["product_name"];
+                            $price=$num_rows["product_price"];
+                            $stock=$num_rows["total_stock"];
+                            $remainingstock=$num_rows["remaining_stock"];
+                            $barcode=$num_rows["barcode_no"];
+                            $description=$num_rows["product_description"];
+                            $productmedia=$num_rows["product_media"];
+                                    
+                                      
+                    ?>
+
+                    <tr>
+                        <td><center><img style='height:25px; width:25px; border-radius: 100%;' src="<?=$productmedia;?>"></center></td>
+                        <td><input type='hidden' value='<?php echo $productid;?>'><?=$name;?></td>
+                        <td>₱ <?=$price;?></td>
+                        <td><?php
+                            if($remainingstock=="0"){
+                                echo"<span style='color: #d9534f;'><strong>Out of Stock</strong></span>";
+                            }else{
+                                echo"".$remainingstock." out of ".$stock."";     
+                            }
+                            ?>
+                        </td> 
+                        <td><?=$barcode;?></td>
+                        <td><?=$description;?></td>               
+                        <td>
+                            <center>
+                                <?php if($access=='admin'){ ?>
+                                <a href='edit_product.php?id=<?php echo $productid;?>' ><button class='manage'><i class='fas fa-cog'></i></button></a>
+                                <?php }else if($access=='employee'){ ?>
+                                <a href='product_inventories.php?id=<?php echo $productid;?>' ><button class='unblock'><i class='fas fa-clipboard-list'></i></button></a>
+                                <?php } ?>
+                             </center>
+                        </td>
+                    </tr>
+                                    
+                    <?php } ?>
+                    
+                            
+                </table>
+            </div>
 
             
     </div>

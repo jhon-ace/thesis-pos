@@ -31,6 +31,14 @@ $result = mysqli_query($link, $query) or die(mysql_error());
     $sql = "INSERT INTO `pos`.`sales`(`sales_id`,`product_id`,`employee_id`,`purchase_name`,`product_description`,`product_price`,`quantity`,`total_amount`,`product_media`,`cashier`,`transaction_time`,`invoice_number`) VALUES('','$submitID','$logid','$productname','$productdescription','$price','1','$price','$media','$cashier','$addtcarttime','0')";
     mysqli_query($link, $sql) or die(mysqli_error());
     header("location: pos.php");
+  }else if($productremaining<=4){
+    $sql = "UPDATE product SET `notif_status` = 0 , `remaining_stock`='$stock'  WHERE `product_id`  = '$submitID' ";
+        mysqli_query($link, $sql) or die(mysqli_error());
+    $sql = "INSERT INTO `pos`.`cart`(`cart_id`,`product_id`,`cart_name`,`cart_description`,`product_price`,`quantity`,`total_amount`,`product_media`,`transaction_time`,`cashier`) VALUES('','$submitID','$productname','$productdescription','$price','1','$price','$media','$addtcarttime','$cashier')";
+    mysqli_query($link, $sql) or die(mysqli_error());
+    $sql = "INSERT INTO `pos`.`sales`(`sales_id`,`product_id`,`employee_id`,`purchase_name`,`product_description`,`product_price`,`quantity`,`total_amount`,`product_media`,`cashier`,`transaction_time`,`invoice_number`) VALUES('','$submitID','$logid','$productname','$productdescription','$price','1','$price','$media','$cashier','$addtcarttime','0')";
+    mysqli_query($link, $sql) or die(mysqli_error());
+    header("location: pos.php");
   }else{
     $sql = "INSERT INTO `pos`.`cart`(`cart_id`,`product_id`,`cart_name`,`cart_description`,`product_price`,`quantity`,`total_amount`,`product_media`,`transaction_time`,`cashier`) VALUES('','$submitID','$productname','$productdescription','$price','1','$price','$media','$addtcarttime','$cashier')";
     mysqli_query($link, $sql) or die(mysqli_error());
